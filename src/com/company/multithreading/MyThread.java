@@ -9,7 +9,7 @@ package com.company.multithreading;
 
 public class MyThread implements Runnable {
 
-    private String threadName;
+    protected String threadName;
 
     public MyThread(String threadName) {
         this.threadName = threadName;
@@ -18,16 +18,24 @@ public class MyThread implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(threadName + "start");
+        System.out.println(threadName + " start");
 
         while (true) {
+            doSomething();
             System.out.printf("%s thread working \n", threadName );
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.printf("%s stopped \n", threadName );
+                return;
             }
         }
+    }
 
+    /**
+     * Override this method for custom action
+     */
+    protected void doSomething() {
+        // do something
     }
 }

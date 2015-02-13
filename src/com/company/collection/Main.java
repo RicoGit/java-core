@@ -12,11 +12,6 @@ import java.util.ArrayDeque;
 public class Main {
 
 
-    /*
-    * Задание написать программу 2 производителя складывают команды в стекб один потредитель забирает и выполняет
-    *
-    * */
-
     public static void main(String[] args) throws InterruptedException {
 
         ArrayDeque<String> que = new ArrayDeque<>();

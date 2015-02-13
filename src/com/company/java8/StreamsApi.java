@@ -40,9 +40,7 @@ public class StreamsApi {
                 // меняет тип каждого элемета на Integer
                 .mapToInt(String::hashCode)
                 // сворачивает стрим по заданной фунции
-                .reduce((current, next) -> {
-                    return current + next;
-                });
+                .reduce((current, next) -> current + next );
 
         if (reduce.isPresent()) {
             System.out.println(reduce.getAsInt());

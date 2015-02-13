@@ -1,5 +1,6 @@
 package com.company.multithreading;
 
+// very simple example
 public class Main {
 
     public static void main(String[] args) {

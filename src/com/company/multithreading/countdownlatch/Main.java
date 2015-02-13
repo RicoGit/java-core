@@ -45,10 +45,9 @@ class MyThreadLatch extends MyThread {
 
     @Override
     public void run() {
+
         for (int i = 0; i < 5; i++) {
-
             try {
-
                 Thread.sleep(500);
                 latch.countDown();
 

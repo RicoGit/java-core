@@ -1,7 +1,5 @@
 package com.company.multithreading.countdownlatch;
 
-import com.company.multithreading.MyThread;
-
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -29,38 +27,6 @@ public class Main {
 
         System.out.println("done");
 
-    }
-
-}
-
-class MyThreadLatch extends MyThread {
-
-    CountDownLatch latch;
-
-    public MyThreadLatch(String threadName, CountDownLatch latch) {
-        super(threadName);
-        this.latch = latch;
-    }
-
-
-    @Override
-    public void run() {
-
-        for (int i = 0; i < 5; i++) {
-            try {
-                Thread.sleep(500);
-                latch.countDown();
-
-                if (latch.getCount() == 0) {
-                    return;
-                }
-
-                System.out.println(this.threadName + " working " + latch.getCount());
-
-            } catch (InterruptedException e) {
-                System.out.println("interrupt");
-            }
-        }
     }
 
 }

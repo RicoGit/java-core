@@ -27,7 +27,7 @@ public class MainTemp {
 //        writeToFile("1 " + data, fileName);
 //        appendToFile("2 " + data, fileName);
 //        appendToFile("3 " + data, fileName);
-        fileWatcher("/home/rico");
+        fileWatcher("/home/rico/webdev/");
 
     }
 
@@ -97,7 +97,7 @@ public class MainTemp {
 
 
     // not finished
-    private static void fileWatcher(String folderName) {
+    private static void fileWatcher(final String folderName) {
 
         FileVisitor<Path> fileVisitor = new SimpleFileVisitor<Path>() {
 
@@ -110,12 +110,11 @@ public class MainTemp {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 
-                if (!Files.isDirectory(file)) {
-                    return FileVisitResult.CONTINUE;
+                if (file.getParent().endsWith("core")) {
+                    System.out.println(file.getFileName());
                 }
 
-                System.out.println(file.getFileName());
-                return super.visitFile(file, attrs);
+                return FileVisitResult.CONTINUE;
             }
         };
 

@@ -3,9 +3,11 @@ package com.sorting;
 import com.sorting.sorter.BubbleSort;
 import com.sorting.sorter.BubbleSortBad;
 import com.sorting.sorter.CocktailSort;
-import com.sorting.sorter.InsertionSortBad;
+import com.sorting.sorter.DefaultJavaSort;
 import com.sorting.sorter.InsertionSort;
+import com.sorting.sorter.InsertionSortBad;
 import com.sorting.sorter.SelectionSort;
+import com.sorting.sorter.ShellSort;
 
 /**
  * User: Constantine Solovev
@@ -24,8 +26,10 @@ public class Runner {
         SelectionSort selectionSort = new SelectionSort();
         InsertionSortBad insertionSortBad = new InsertionSortBad();
         InsertionSort insertionSort = new InsertionSort();
+        ShellSort shellSort = new ShellSort();
+        DefaultJavaSort defaultJavaSort = new DefaultJavaSort();
 
-        testAll(bubbleSortBad, bubbleSort, cocktailSort, selectionSort, insertionSortBad, insertionSort);
+        testAll(bubbleSortBad, bubbleSort, cocktailSort, selectionSort, insertionSortBad, insertionSort, shellSort);
 
         SortUtils.runSortWithBenchMark(bubbleSortBad);
 
@@ -38,6 +42,11 @@ public class Runner {
         SortUtils.runSortWithBenchMark(insertionSortBad);
 
         SortUtils.runSortWithBenchMark(insertionSort);
+
+        SortUtils.runSortWithBenchMark(shellSort);
+
+        // java platform default sort
+        SortUtils.runSortWithBenchMark(defaultJavaSort);
 
 
     }

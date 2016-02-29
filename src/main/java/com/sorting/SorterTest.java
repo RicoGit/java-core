@@ -29,9 +29,9 @@ public class SorterTest {
 
 
         if (Arrays.equals(sourceArray, expectedArray)) {
-            System.out.printf("\n    *** %s - Test success *** \n\n", sorterName);
+            System.out.printf("    *** %-20s - Test success *** \n", sorterName);
         } else {
-            System.out.printf("\n!!!!!! %s - Test failed !!!!! \n\n", sorterName);
+            System.out.printf("!!!!!! %-20s - Test failed !!!!! \n", sorterName);
 
             System.out.println("Expected " + Arrays.toString(expectedArray));
             System.out.println("Actually " + Arrays.toString(sourceArray));

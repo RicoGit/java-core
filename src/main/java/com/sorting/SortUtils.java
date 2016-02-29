@@ -41,7 +41,7 @@ public class SortUtils {
         /* Show results */
 
         System.out.printf(
-            "%20s  - sort %d elements %d times, time spent ( %d ms )  \n",
+            "%-20s  - sort %d elements %d times, time spent ( %d ms )  \n",
             sorter.getClass().getSimpleName(),
             arrayLength,
             timesOfRepeats,

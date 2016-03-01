@@ -1,14 +1,22 @@
 package com.sorting;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.sorting.SortUtils.BenchResult;
 import com.sorting.sorter.BubbleSort;
 import com.sorting.sorter.BubbleSortBad;
 import com.sorting.sorter.CocktailSort;
 import com.sorting.sorter.DefaultJavaSort;
 import com.sorting.sorter.InsertionSort;
 import com.sorting.sorter.InsertionSortBad;
+import com.sorting.sorter.MergeSortAsc;
 import com.sorting.sorter.MergeSortDesc;
+import com.sorting.sorter.MergeSortDescWithInsertion;
 import com.sorting.sorter.SelectionSort;
 import com.sorting.sorter.ShellSort;
+
+import static com.sorting.SortUtils.DEFAULT_ARRAY_LEGTH;
 
 /**
  * User: Constantine Solovev
@@ -19,7 +27,7 @@ import com.sorting.sorter.ShellSort;
 public class Runner {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         BubbleSortBad bubbleSortBad = new BubbleSortBad();
         BubbleSort bubbleSort = new BubbleSort();
@@ -28,7 +36,9 @@ public class Runner {
         InsertionSortBad insertionSortBad = new InsertionSortBad();
         InsertionSort insertionSort = new InsertionSort();
         ShellSort shellSort = new ShellSort();
-        MergeSortDesc mergeSortDesc = new MergeSortDesc(SortUtils.DEFAULT_ARRAY_LEGTH);
+        MergeSortDesc mergeSortDesc = new MergeSortDesc(DEFAULT_ARRAY_LEGTH);
+        MergeSortAsc mergeSortAsc = new MergeSortAsc(DEFAULT_ARRAY_LEGTH);
+        MergeSortDescWithInsertion mergeSortDescWithInsertion = new MergeSortDescWithInsertion(DEFAULT_ARRAY_LEGTH);
 
         DefaultJavaSort defaultJavaSort = new DefaultJavaSort();
 
@@ -41,30 +51,38 @@ public class Runner {
             insertionSort,
             shellSort,
             mergeSortDesc,
+            mergeSortAsc,
+            mergeSortDescWithInsertion,
 
             defaultJavaSort
         );
 
-        SortUtils.runSortWithBenchMark(bubbleSortBad);
+        List<BenchResult> results = SortUtils.runSortWithBenchMark(
+            bubbleSortBad,
+            bubbleSort,
+            cocktailSort,
+            selectionSort,
+            insertionSortBad,
+            insertionSort,
+            shellSort,
+            mergeSortDesc,
+            mergeSortAsc,
+            mergeSortDescWithInsertion,
 
-        SortUtils.runSortWithBenchMark(bubbleSort);
+            // java platform default sort
+            defaultJavaSort
+        );
 
-        SortUtils.runSortWithBenchMark(cocktailSort);
+        Collections.sort(results);
 
-        SortUtils.runSortWithBenchMark(selectionSort);
+        showResults(results);
 
-        SortUtils.runSortWithBenchMark(insertionSortBad);
+        Thread.sleep(10);
+    }
 
-        SortUtils.runSortWithBenchMark(insertionSort);
-
-        SortUtils.runSortWithBenchMark(shellSort);
-
-        SortUtils.runSortWithBenchMark(mergeSortDesc);
-
-        // java platform default sort
-        SortUtils.runSortWithBenchMark(defaultJavaSort);
-
-
+    private static void showResults(List<BenchResult> results) {
+        System.out.println("\n Sorting benchmark results \n");
+        results.forEach(System.out::println);
     }
 
     private static void testAll(Sorter... sorters) {

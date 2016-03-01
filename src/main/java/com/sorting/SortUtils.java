@@ -1,9 +1,12 @@
 package com.sorting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -18,11 +21,11 @@ public class SortUtils {
     public final static int DEFAULT_ARRAY_LEGTH = 1000;
 
 
-    public static void runSortWithBenchMark(Sorter sorter) {
-        runSortWithBenchMark(sorter, DEFAULT_TIMES_OF_REPEAT, DEFAULT_ARRAY_LEGTH);
+    public static List<BenchResult> runSortWithBenchMark(Sorter ... sorters) {
+        return runSortWithBenchMark(DEFAULT_TIMES_OF_REPEAT, DEFAULT_ARRAY_LEGTH, sorters);
     }
 
-    public static void runSortWithBenchMark(Sorter sorter, int timesOfRepeats, int arrayLength) {
+    public static List<BenchResult> runSortWithBenchMark(int timesOfRepeats, int arrayLength, Sorter... sorters) {
 
         /* Preparing, create "timesOfRepeats" arrays with "arrayLength" length */
 
@@ -30,24 +33,27 @@ public class SortUtils {
         for (int i = 0; i < timesOfRepeats; i++) {
             arrays.add(i, SortUtils.getIntArray(arrayLength));
         }
+
+        return Stream.of(sorters).map(sorter -> {
+            return new BenchResult(sorter.getClass().getSimpleName(), runBenchmark(sorter, arrays));
+        }).collect(Collectors.toList());
+
+    }
+
+    private static long runBenchmark(Sorter sorter, List<Comparable[]> sourceArray) {
+
+        List<Comparable[]> deepCopy =
+            sourceArray.stream()
+                .map(array -> Arrays.copyOf(array, array.length))
+                .collect(Collectors.toList());
+
         long startTime = currentTimeMillis();
 
-        /* Start sorting*/
-
-        for (Comparable[] array : arrays) {
+        for (Comparable[] array : deepCopy) {
             sorter.sort(array);
         }
 
-        /* Show results */
-
-        System.out.printf(
-            "%-20s  - sort %d elements %d times, time spent ( %d ms )  \n",
-            sorter.getClass().getSimpleName(),
-            arrayLength,
-            timesOfRepeats,
-            currentTimeMillis() - startTime
-        );
-
+        return currentTimeMillis() - startTime;
     }
 
     private static Integer[] getIntArray(int length) {
@@ -56,6 +62,27 @@ public class SortUtils {
                         .map(elem -> elem = random.nextInt(length))
                         .boxed()
                         .toArray(Integer[]::new);
+    }
+
+
+    public static class BenchResult implements Comparable<BenchResult> {
+       public String sortName;
+       public long sortResult;
+
+        public BenchResult(String sortName, long sortResult) {
+            this.sortName = sortName;
+            this.sortResult = sortResult;
+        }
+
+        @Override
+        public int compareTo(BenchResult o) {
+            return Long.compare(this.sortResult, o.sortResult);
+        }
+
+        @Override
+        public String toString() {
+            return "   *** " + sortName + " *** => ( " + sortResult + " ) millis";
+        }
     }
 
 }

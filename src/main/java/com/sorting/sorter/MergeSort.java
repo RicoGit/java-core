@@ -19,11 +19,12 @@ public abstract class MergeSort implements Sorter {
 
     public void merge(Comparable[] array, int start, int mid, int end) {
 
-// copy first part of array to tmp array
-//        for(int i = start; i <= end; i++) {
-//            tmpArray[i] = array[i];
-//        }
-// System.arraycopy() is more faster
+        // copy first part of array to tmp array
+        // for(int i = start; i <= end; i++) {
+        //      tmpArray[i] = array[i];
+        // }
+
+        // System.arraycopy() is more faster
         System.arraycopy(array, start, tmpArray, start, end + 1 - start);
 
         int i = start;

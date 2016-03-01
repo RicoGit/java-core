@@ -6,6 +6,7 @@ import com.sorting.sorter.CocktailSort;
 import com.sorting.sorter.DefaultJavaSort;
 import com.sorting.sorter.InsertionSort;
 import com.sorting.sorter.InsertionSortBad;
+import com.sorting.sorter.MergeSortDesc;
 import com.sorting.sorter.SelectionSort;
 import com.sorting.sorter.ShellSort;
 
@@ -27,9 +28,22 @@ public class Runner {
         InsertionSortBad insertionSortBad = new InsertionSortBad();
         InsertionSort insertionSort = new InsertionSort();
         ShellSort shellSort = new ShellSort();
+        MergeSortDesc mergeSortDesc = new MergeSortDesc(SortUtils.DEFAULT_ARRAY_LEGTH);
+
         DefaultJavaSort defaultJavaSort = new DefaultJavaSort();
 
-        testAll(bubbleSortBad, bubbleSort, cocktailSort, selectionSort, insertionSortBad, insertionSort, shellSort);
+        testAll(
+            bubbleSortBad,
+            bubbleSort,
+            cocktailSort,
+            selectionSort,
+            insertionSortBad,
+            insertionSort,
+            shellSort,
+            mergeSortDesc,
+
+            defaultJavaSort
+        );
 
         SortUtils.runSortWithBenchMark(bubbleSortBad);
 
@@ -44,6 +58,8 @@ public class Runner {
         SortUtils.runSortWithBenchMark(insertionSort);
 
         SortUtils.runSortWithBenchMark(shellSort);
+
+        SortUtils.runSortWithBenchMark(mergeSortDesc);
 
         // java platform default sort
         SortUtils.runSortWithBenchMark(defaultJavaSort);

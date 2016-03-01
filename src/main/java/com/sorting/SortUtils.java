@@ -14,8 +14,8 @@ import static java.lang.System.currentTimeMillis;
 
 public class SortUtils {
 
-    private final static int DEFAULT_TIMES_OF_REPEAT = 1000;
-    private final static int DEFAULT_ARRAY_LEGTH = 1000;
+    public final static int DEFAULT_TIMES_OF_REPEAT = 1000;
+    public final static int DEFAULT_ARRAY_LEGTH = 1000;
 
 
     public static void runSortWithBenchMark(Sorter sorter) {

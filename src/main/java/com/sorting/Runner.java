@@ -13,6 +13,7 @@ import com.sorting.sorter.InsertionSortBad;
 import com.sorting.sorter.MergeSortAsc;
 import com.sorting.sorter.MergeSortDesc;
 import com.sorting.sorter.MergeSortDescWithInsertion;
+import com.sorting.sorter.QuickSort;
 import com.sorting.sorter.SelectionSort;
 import com.sorting.sorter.ShellSort;
 
@@ -39,6 +40,7 @@ public class Runner {
         MergeSortDesc mergeSortDesc = new MergeSortDesc(DEFAULT_ARRAY_LEGTH);
         MergeSortAsc mergeSortAsc = new MergeSortAsc(DEFAULT_ARRAY_LEGTH);
         MergeSortDescWithInsertion mergeSortDescWithInsertion = new MergeSortDescWithInsertion(DEFAULT_ARRAY_LEGTH);
+        QuickSort quickSort = new QuickSort();
 
         DefaultJavaSort defaultJavaSort = new DefaultJavaSort();
 
@@ -53,6 +55,7 @@ public class Runner {
             mergeSortDesc,
             mergeSortAsc,
             mergeSortDescWithInsertion,
+            quickSort,
 
             defaultJavaSort
         );
@@ -68,6 +71,7 @@ public class Runner {
             mergeSortDesc,
             mergeSortAsc,
             mergeSortDescWithInsertion,
+            quickSort,
 
             // java platform default sort
             defaultJavaSort

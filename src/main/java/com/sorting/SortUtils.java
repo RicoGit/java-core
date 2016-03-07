@@ -35,7 +35,9 @@ public class SortUtils {
         }
 
         return Stream.of(sorters).map(sorter -> {
-            return new BenchResult(sorter.getClass().getSimpleName(), runBenchmark(sorter, arrays));
+            BenchResult result = new BenchResult(sorter.getClass().getSimpleName(), runBenchmark(sorter, arrays));
+            System.out.println(String.format("Finish -> %s", result));
+            return result;
         }).collect(Collectors.toList());
 
     }
@@ -53,7 +55,26 @@ public class SortUtils {
             sorter.sort(array);
         }
 
-        return currentTimeMillis() - startTime;
+        long endTime = currentTimeMillis() - startTime;
+
+        convincedOfResultsLoyalty(deepCopy, sorter.getClass().getSimpleName());
+
+        return endTime;
+    }
+
+    /**
+     * Ensure that all arrays are really sorted.
+     */
+    private static void convincedOfResultsLoyalty(List<Comparable[]> deepCopy, String sorterName) {
+        deepCopy.stream()
+            .forEach(array -> {
+                for (int i = 0; i < array.length - 1; i++) {
+                    if (array[i].compareTo(array[i + 1]) > 0) {
+                        throw new RuntimeException(sorterName + " sort incorrectly");
+                    };
+                }
+            });
+
     }
 
     private static Integer[] getIntArray(int length) {

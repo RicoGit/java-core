@@ -24,8 +24,6 @@ public class MergeSortDescWithInsertion extends MergeSort {
      */
     private void sort(Comparable[] array, int start,int end) {
 
-        if (start >= end) return;
-
         int mid = start + (end - start) / 2;
 
         if (threshold > mid - start) {

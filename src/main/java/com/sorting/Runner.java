@@ -8,16 +8,16 @@ import com.sorting.sorter.BubbleSort;
 import com.sorting.sorter.BubbleSortBad;
 import com.sorting.sorter.CocktailSort;
 import com.sorting.sorter.DefaultJavaSort;
+import com.sorting.sorter.HeapSort;
 import com.sorting.sorter.InsertionSort;
 import com.sorting.sorter.InsertionSortBad;
 import com.sorting.sorter.MergeSortAsc;
 import com.sorting.sorter.MergeSortDesc;
 import com.sorting.sorter.MergeSortDescWithInsertion;
 import com.sorting.sorter.QuickSort;
+import com.sorting.sorter.QuickSortWithInsertion;
 import com.sorting.sorter.SelectionSort;
 import com.sorting.sorter.ShellSort;
-
-import static com.sorting.SortUtils.DEFAULT_ARRAY_LEGTH;
 
 /**
  * User: Constantine Solovev
@@ -25,10 +25,17 @@ import static com.sorting.SortUtils.DEFAULT_ARRAY_LEGTH;
  */
 
 
+/**
+ * todo
+ * Tim sort
+ * Radix sort
+ */
 public class Runner {
 
 
     public static void main(String[] args) throws InterruptedException {
+
+        int arrayLength = 10_000;
 
         BubbleSortBad bubbleSortBad = new BubbleSortBad();
         BubbleSort bubbleSort = new BubbleSort();
@@ -37,10 +44,12 @@ public class Runner {
         InsertionSortBad insertionSortBad = new InsertionSortBad();
         InsertionSort insertionSort = new InsertionSort();
         ShellSort shellSort = new ShellSort();
-        MergeSortDesc mergeSortDesc = new MergeSortDesc(DEFAULT_ARRAY_LEGTH);
-        MergeSortAsc mergeSortAsc = new MergeSortAsc(DEFAULT_ARRAY_LEGTH);
-        MergeSortDescWithInsertion mergeSortDescWithInsertion = new MergeSortDescWithInsertion(DEFAULT_ARRAY_LEGTH);
+        MergeSortDesc mergeSortDesc = new MergeSortDesc(arrayLength);
+        MergeSortAsc mergeSortAsc = new MergeSortAsc(arrayLength);
+        MergeSortDescWithInsertion mergeSortDescWithInsertion = new MergeSortDescWithInsertion(arrayLength);
         QuickSort quickSort = new QuickSort();
+        QuickSortWithInsertion quickSortWithInsertion = new QuickSortWithInsertion();
+        HeapSort heapSort = new HeapSort();
 
         DefaultJavaSort defaultJavaSort = new DefaultJavaSort();
 
@@ -56,22 +65,26 @@ public class Runner {
             mergeSortAsc,
             mergeSortDescWithInsertion,
             quickSort,
+            quickSortWithInsertion,
+            heapSort,
 
             defaultJavaSort
         );
 
-        List<BenchResult> results = SortUtils.runSortWithBenchMark(
-            bubbleSortBad,
-            bubbleSort,
-            cocktailSort,
-            selectionSort,
-            insertionSortBad,
-            insertionSort,
-            shellSort,
+        List<BenchResult> results = SortUtils.runSortWithBenchMark(100, arrayLength,
+//            bubbleSortBad,
+//            bubbleSort,
+//            cocktailSort,
+//            selectionSort,
+//            insertionSortBad,
+//            insertionSort,
+//            shellSort,
             mergeSortDesc,
             mergeSortAsc,
             mergeSortDescWithInsertion,
             quickSort,
+            quickSortWithInsertion,
+            heapSort,
 
             // java platform default sort
             defaultJavaSort

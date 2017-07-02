@@ -12,7 +12,7 @@ import com.jdk.multithreading.countdownlatch.MyThreadLatch;
  */
 
 
-public class Main1 {
+public class Simple {
 
     public static void main(String[] args) {
 

@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 /**
  * 2 threads is working and main thread is await when threads work 5 times
  */
-public class Main {
+public class Simple {
 
     public static void main(String[] args) {
 
